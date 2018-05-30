@@ -39,7 +39,7 @@ class Lasso(LinearRegression):
         self.y = y
         self.X_test = X_test
         self.y_test = y_test
-        self.w = calulate_optimal_weights(X, y, X_test, y_test)
+        self.w = calculate_optimal_weights(X, y, X_test, y_test)
     
 class ElasticNet(LinearRegression):
     
@@ -51,13 +51,13 @@ class ElasticNet(LinearRegression):
         self.X_test = X_test
         self.y_test = y_test
         
-        optimal_weights = calulate_optimal_weights(X, y, X_test, y_test)        
+        optimal_weights = calculate_optimal_weights(X, y, X_test, y_test)        
         l2 = 100
 
         self.w = np.linalg.solve(l2 * np.eye(X.T.shape[0]) +
                                  optimal_weights + np.dot(X.T, X), np.dot(X.T, y))
 
-def calulate_optimal_weights(X, y, X_test, y_test):
+def calculate_optimal_weights(X, y, X_test, y_test):
     w = np.random.rand(X.shape[1]) / np.sqrt(X.shape[1])
     learning_rate = 0.001
     l1 = 10
